@@ -1,0 +1,305 @@
+<div class="customers-page">
+
+
+  <div class="page-header">
+    <div>
+      <h2>Customers</h2>
+      <p>Manage and view all your customers.</p>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon blue">
+        <i class="bi bi-people-fill"></i>
+      </div>
+      <div>
+        <span>Total Customers</span>
+        <h3>{{ totalCustomers }}</h3>
+      </div>
+    </div>
+
+
+
+
+    <div class="stat-card">
+      <div class="stat-icon green">
+        <i class="bi bi-person-check-fill"></i>
+      </div>
+      <div>
+        <span>Active Customers</span>
+        <h3>{{ activeCustomers }}</h3>
+        <small> {{ getActivePercentage() }}% of customers </small>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon orange">
+        <i class="bi bi-person-plus-fill"></i>
+      </div>
+
+
+
+
+
+
+      <div>
+        <span>New Customers</span>
+        <h3>{{ newCustomers }} </h3>
+        <small> New this month </small>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon purple">
+        <i class="bi bi-car-front-fill"></i>
+      </div>
+      <div>
+        <span>Registered Vehicles</span>
+        <h3>{{ registeredVehicles }}</h3>
+        <small> {{ carsPerCustomer }} cars per customer </small>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="customers-card">
+    <div class="customers-card-header">
+      <div>
+        <h3>Customer List</h3>
+        <p>View and manage customer information</p>
+      </div>
+      <div class="header-actions">
+
+        <div class="search-box">
+          <i class="bi bi-search"></i>
+          <input type="text" placeholder="Search customers..." [(ngModel)]="searchText" />
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Customer</th>
+
+            <th>Phone</th>
+
+            <th>Vehicles</th>
+
+            <th>Last Visit</th>
+
+            <th>Status</th>
+
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+
+
+
+        <tbody>
+          <tr *ngFor="let customer of filteredCustomers">
+            <!-- CUSTOMER -->
+
+            <td>
+              <div class="customer-info">
+                <img [src]="customer.image" [alt]="customer.name" />
+
+                <div>
+                  <strong>
+                    {{ customer.name }}
+                  </strong>
+
+                  <span>
+                    {{ customer.email }}
+                  </span>
+                </div>
+              </div>
+            </td>
+
+            <td>
+              {{ customer.phone }}
+            </td>
+            <td>
+              <div class="vehicles-count">
+                <i class="bi bi-car-front"></i>
+                {{ customer.cars }}
+              </div>
+            </td>
+            <td>{{ customer.lastVisit }}</td>
+            <td>
+              <span
+                class="status"
+                [class.active]="customer.status === 'Active'"
+                [class.inactive]="customer.status === 'Inactive'">{{ customer.status }}</span>
+            </td>
+            <td>
+              <div class="actions">
+                <button class="action-btn view" (click)="viewCustomer(customer)">
+                  <i class="bi bi-eye"></i>
+                </button>
+                <button class="action-btn edit" (click)="editCustomer(customer.id)">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button class="action-btn delete" (click)="deleteCustomer(customer.id)">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="filteredCustomers.length === 0">
+            <td colspan="6" class="no-data">No customers found.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+
+
+
+
+
+
+    <div class="table-footer">
+      <span> Showing 1 - {{ filteredCustomers.length }} of 1,248 customers </span>
+
+      <div class="pagination">
+        <button>
+          <i class="bi bi-chevron-left"></i>
+        </button>
+        <button class="active">1</button>
+        <button>2</button>
+        <button>3</button>
+
+        <button><i class="bi bi-chevron-right"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="modal-overlay" *ngIf="modalMode" (click)="closeModal()">
+  <div class="customer-modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div>
+        <h3>
+          {{ modalMode === 'view' ? 'Customer Details' : 'Edit Customer' }}
+        </h3>
+        <p>
+          {{ modalMode === 'view' ? 'View customer information' : 'Update customer information' }}
+        </p>
+      </div>
+
+      <button class="close-btn" (click)="closeModal()">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+
+
+
+
+
+
+    <div class="modal-body" *ngIf="modalMode === 'view'">
+      <div class="customer-profile">
+        <div class="profile-avatar">
+          {{ selectedCustomer?.name?.charAt(0) }}
+        </div>
+
+        <div>
+          <h3>
+            {{ selectedCustomer?.name }}
+          </h3>
+
+          <span>
+            {{ selectedCustomer?.email }}
+          </span>
+        </div>
+      </div>
+
+
+
+      <div class="details-grid">
+        <div class="detail-item">
+          <span>Phone</span>
+          <strong>
+            {{ selectedCustomer?.phone }}
+          </strong>
+        </div>
+
+        <div class="detail-item">
+          <span>Vehicles</span>
+          <strong>
+            {{ selectedCustomer?.cars }}
+          </strong>
+        </div>
+
+        <div class="detail-item">
+          <span>Last Visit</span>
+          <strong>
+            {{ selectedCustomer?.lastVisit || 'No visits yet' }}
+          </strong>
+        </div>
+
+        <div class="detail-item">
+          <span>Status</span>
+          <strong
+            class="status"
+            [class.active]="selectedCustomer?.status === 'Active'"
+            [class.inactive]="selectedCustomer?.status === 'Inactive'"
+          >
+            {{ selectedCustomer?.status }}
+          </strong>
+        </div>
+      </div>
+    </div>
+
+
+    
+    <div class="modal-body" *ngIf="modalMode === 'edit'">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input
+          type="text"
+          [(ngModel)]="selectedCustomer.fullName"
+          placeholder="Enter customer name"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" [(ngModel)]="selectedCustomer.email" placeholder="Enter email" />
+      </div>
+
+      <div class="form-group">
+        <label>Phone</label>
+
+        <input type="text" [(ngModel)]="selectedCustomer.phone" placeholder="Enter phone" />
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="cancel-btn" (click)="closeModal()">Cancel</button>
+
+      <button *ngIf="modalMode === 'edit'" class="save-btn" (click)="saveCustomer()">
+        <i class="bi bi-check-lg"></i>
+        Save Changes
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<nav class="navbar bg-white border-bottom px-4 py-3">
+  <div class="container-fluid p-0 d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center gap-3">
+      <button class="btn border-0 fs-4">
+        <i class="bi bi-list"></i>
+      </button>
+      <div>
+        <h3 class="fw-bold mb-1">Dashboard</h3>
+        <p class="text-secondary mb-0">Welcome back, {{ adminName }}!</p>
+      </div>
+    </div>
+    <div class="d-flex align-items-center gap-4">
+      <div class="vr"></div>
+      <div class="d-flex align-items-center gap-3">
+        <div
+          class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center"
+          style="width: 48px; height: 48px">{{ adminInitials }}</div>
+        <div>
+          <h6 class="fw-bold mb-1">{{ adminName }}</h6>
+          <small class="text-secondary">{{ adminRole }}</small>
+        </div>
+
+        <i class="bi bi-chevron-down"></i>
+      </div>
+    </div>
+  </div>
+</nav>

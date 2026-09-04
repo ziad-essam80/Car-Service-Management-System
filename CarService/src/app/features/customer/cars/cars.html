@@ -1,0 +1,591 @@
+<div class="cars-page">
+
+  <!-- Header -->
+
+  <div class="page-header">
+
+    <div class="header-content">
+
+      <span class="page-label">
+        VEHICLE MANAGEMENT
+      </span>
+
+      <h1>
+        My Cars
+      </h1>
+
+      <p>
+        Manage your vehicles and keep track
+        of their maintenance.
+      </p>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="add-car-btn"
+      (click)="openAdd()"
+    >
+
+      <span>+</span>
+
+      Add New Car
+
+    </button>
+
+  </div>
+
+
+  <!-- Loading -->
+
+  <div
+    class="loading"
+    *ngIf="loading"
+  >
+    Loading cars...
+  </div>
+
+
+  <!-- Cars -->
+
+  <div
+    class="cars-grid"
+    *ngIf="!loading && cars.length > 0"
+  >
+
+    <div
+      class="car-card"
+      *ngFor="let car of cars"
+    >
+
+      <!-- Car Cover -->
+
+      <div class="car-image">
+
+        <i class="bi bi-car-front-fill car-main-icon"></i>
+
+        <div class="image-overlay"></div>
+
+        <div class="car-badge">
+          MY CAR
+        </div>
+
+      </div>
+
+
+      <!-- Content -->
+
+      <div class="car-content">
+
+        <div class="car-title">
+
+          <div>
+
+            <span class="car-brand">
+              {{ car.brand }}
+            </span>
+
+            <h2>
+              {{ car.model }}
+            </h2>
+
+          </div>
+
+
+          <span class="year">
+            {{ car.year }}
+          </span>
+
+        </div>
+
+
+        <!-- Details -->
+
+        <div class="car-details">
+
+          <div class="detail-box">
+
+            <span class="detail-label">
+              PLATE NUMBER
+            </span>
+
+            <strong>
+              {{ car.plateNumber }}
+            </strong>
+
+          </div>
+
+
+          <div class="detail-box">
+
+            <span class="detail-label">
+              COLOR
+            </span>
+
+            <strong>
+              {{ car.color }}
+            </strong>
+
+          </div>
+
+
+          <div class="detail-box mileage-box">
+
+            <span class="detail-label">
+              MILEAGE
+            </span>
+
+            <strong>
+              {{ car.mileage | number }} KM
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <!-- Actions -->
+
+        <div class="card-actions">
+
+          <button
+            type="button"
+            class="details-btn"
+            (click)="viewDetails(car.id)"
+          >
+            View Details
+          </button>
+
+
+          <button
+            type="button"
+            class="edit-btn"
+            (click)="openEdit(car)"
+          >
+            Edit
+          </button>
+
+
+          <button
+            type="button"
+            class="delete-btn"
+            (click)="deleteCar(car.id)"
+          >
+            <i class="bi bi-trash"></i>
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Empty -->
+
+  <div
+    class="empty-state"
+    *ngIf="!loading && cars.length === 0"
+  >
+
+    <i class="bi bi-car-front"></i>
+
+    <h3>
+      No Cars Yet
+    </h3>
+
+    <p>
+      Add your first vehicle to start booking services.
+    </p>
+
+    <button
+      type="button"
+      (click)="openAdd()"
+    >
+      Add New Car
+    </button>
+
+  </div>
+
+</div>
+
+
+
+<!-- ==================================
+     Add / Edit Car
+================================== -->
+
+<div
+  class="modal-overlay"
+  *ngIf="showForm"
+>
+
+  <div class="modal-card">
+
+    <div class="modal-header">
+
+      <div>
+
+        <span class="modal-label">
+          VEHICLE INFORMATION
+        </span>
+
+        <h2>
+          {{ isEdit ? 'Edit Car' : 'Add New Car' }}
+        </h2>
+
+        <p>
+          Enter your vehicle information below.
+        </p>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="close-btn"
+        (click)="closeForm()"
+      >
+        <i class="bi bi-x-lg"></i>
+      </button>
+
+    </div>
+
+
+    <form
+      [formGroup]="carForm"
+      (ngSubmit)="saveCar()"
+    >
+
+      <div class="form-row">
+
+        <div class="form-group">
+
+          <label>Brand</label>
+
+          <input
+            type="text"
+            formControlName="brand"
+            placeholder="Example: Toyota"
+          >
+
+          <small
+            *ngIf="
+              carForm.get('brand')?.touched &&
+              carForm.get('brand')?.invalid
+            "
+          >
+            Brand is required.
+          </small>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Model</label>
+
+          <input
+            type="text"
+            formControlName="model"
+            placeholder="Example: Corolla"
+          >
+
+          <small
+            *ngIf="
+              carForm.get('model')?.touched &&
+              carForm.get('model')?.invalid
+            "
+          >
+            Model is required.
+          </small>
+
+        </div>
+
+      </div>
+
+
+      <div class="form-row">
+
+        <div class="form-group">
+
+          <label>Year</label>
+
+          <input
+            type="number"
+            formControlName="year"
+            placeholder="2024"
+          >
+
+          <small
+            *ngIf="
+              carForm.get('year')?.touched &&
+              carForm.get('year')?.invalid
+            "
+          >
+            Enter a valid year.
+          </small>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Plate Number</label>
+
+          <input
+            type="text"
+            formControlName="plateNumber"
+            placeholder="ABC 123"
+          >
+
+          <small
+            *ngIf="
+              carForm.get('plateNumber')?.touched &&
+              carForm.get('plateNumber')?.invalid
+            "
+          >
+            Plate number is required.
+          </small>
+
+        </div>
+
+      </div>
+
+
+      <div class="form-row">
+
+        <div class="form-group">
+
+          <label>Color</label>
+
+          <input
+            type="text"
+            formControlName="color"
+            placeholder="Black"
+          >
+
+          <small
+            *ngIf="
+              carForm.get('color')?.touched &&
+              carForm.get('color')?.invalid
+            "
+          >
+            Color is required.
+          </small>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Mileage</label>
+
+          <input
+            type="number"
+            formControlName="mileage"
+            placeholder="50000"
+          >
+
+          <small
+            *ngIf="
+              carForm.get('mileage')?.touched &&
+              carForm.get('mileage')?.invalid
+            "
+          >
+            Enter valid mileage.
+          </small>
+
+        </div>
+
+      </div>
+
+
+      <div class="modal-actions">
+
+        <button
+          type="button"
+          class="cancel-btn"
+          (click)="closeForm()"
+        >
+          Cancel
+        </button>
+
+
+        <button
+          type="submit"
+          class="save-btn"
+        >
+
+          {{
+            isEdit
+              ? 'Save Changes'
+              : 'Add Car'
+          }}
+
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+
+<!-- ==================================
+     Car Details
+================================== -->
+
+<div
+  class="modal-overlay"
+  *ngIf="showDetails && selectedCar"
+>
+
+  <div class="modal-card details-modal">
+
+    <div class="modal-header">
+
+      <div>
+
+        <span class="modal-label">
+          VEHICLE DETAILS
+        </span>
+
+        <h2>
+          {{ selectedCar.brand }}
+          {{ selectedCar.model }}
+        </h2>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="close-btn"
+        (click)="closeDetails()"
+      >
+        <i class="bi bi-x-lg"></i>
+      </button>
+
+    </div>
+
+
+    <div class="details-car-cover">
+
+      <i class="bi bi-car-front-fill"></i>
+
+    </div>
+
+
+    <div class="details-grid">
+
+      <div>
+        <span>Brand</span>
+        <strong>{{ selectedCar.brand }}</strong>
+      </div>
+
+      <div>
+        <span>Model</span>
+        <strong>{{ selectedCar.model }}</strong>
+      </div>
+
+      <div>
+        <span>Year</span>
+        <strong>{{ selectedCar.year }}</strong>
+      </div>
+
+      <div>
+        <span>Plate Number</span>
+        <strong>{{ selectedCar.plateNumber }}</strong>
+      </div>
+
+      <div>
+        <span>Color</span>
+        <strong>{{ selectedCar.color }}</strong>
+      </div>
+
+      <div>
+        <span>Mileage</span>
+        <strong>
+          {{ selectedCar.mileage | number }} KM
+        </strong>
+      </div>
+
+    </div>
+
+
+    <div class="maintenance-section">
+
+      <h3>
+        Last Service
+      </h3>
+
+
+      <div
+        class="maintenance-card"
+        *ngIf="selectedCar.lastService"
+      >
+
+        <strong>
+          {{ selectedCar.lastService.serviceName }}
+        </strong>
+
+        <span>
+          {{ selectedCar.lastService.date }}
+        </span>
+
+      </div>
+
+
+      <div
+        class="no-data"
+        *ngIf="!selectedCar.lastService"
+      >
+        No completed services yet.
+      </div>
+
+    </div>
+
+
+    <div class="maintenance-section">
+
+      <h3>
+        Current Booking
+      </h3>
+
+
+      <div
+        class="maintenance-card"
+        *ngIf="selectedCar.currentBooking"
+      >
+
+        <strong>
+          {{ selectedCar.currentBooking.serviceName }}
+        </strong>
+
+        <span>
+          Status:
+          {{ selectedCar.currentBooking.status }}
+        </span>
+
+      </div>
+
+
+      <div
+        class="no-data"
+        *ngIf="!selectedCar.currentBooking"
+      >
+        No active booking.
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

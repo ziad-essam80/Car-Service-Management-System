@@ -1,0 +1,86 @@
+<div class="customer-layout">
+  <aside class="sidebar" [class.sidebar-closed]="!sidebarOpen">
+    <div class="sidebar-header">
+      <div class="logo-icon">
+        <i class="bi bi-car-front-fill"></i>
+      </div>
+      <div class="logo-text" *ngIf="sidebarOpen">
+        <strong> Car Service </strong>
+        <span> Customer Portal </span>
+      </div>
+    </div>
+    <div class="menu-title" *ngIf="sidebarOpen">MAIN MENU</div>
+    <nav class="sidebar-menu">
+      <a
+        routerLink="/customer/dashboard"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{
+          exact: true,
+        }">
+        <i class="bi bi-grid-1x2-fill"></i>
+        <span *ngIf="sidebarOpen"> Dashboard </span>
+      </a>
+      <a routerLink="/customer/cars" routerLinkActive="active">
+        <i class="bi bi-car-front-fill"></i>
+
+        <span *ngIf="sidebarOpen"> My Cars </span>
+      </a>
+      <a routerLink="/customer/services" routerLinkActive="active">
+        <i class="bi bi-tools"></i>
+
+        <span *ngIf="sidebarOpen"> Services </span>
+      </a>
+      <a routerLink="/customer/bookings" routerLinkActive="active">
+        <i class="bi bi-calendar-check"></i>
+        <span *ngIf="sidebarOpen"> My Bookings </span>
+      </a>
+      <a routerLink="/customer/history" routerLinkActive="active">
+        <i class="bi bi-clock-history"></i>
+        <span *ngIf="sidebarOpen"> History </span>
+      </a>
+      <div class="menu-title account-title" *ngIf="sidebarOpen">ACCOUNT</div>
+      <a routerLink="/customer/profile" routerLinkActive="active">
+        <i class="bi bi-person-fill"></i>
+
+        <span *ngIf="sidebarOpen"> My Profile </span>
+      </a>
+    </nav>
+    <div class="sidebar-bottom">
+      <button type="button" class="logout-btn" (click)="logout()">
+        <i class="bi bi-box-arrow-right"></i>
+        <span *ngIf="sidebarOpen"> Logout </span>
+      </button>
+    </div>
+  </aside>
+  <div class="main-area">
+    <header class="customer-navbar">
+      <div class="navbar-left">
+        <button type="button" class="menu-btn" (click)="toggleSidebar()">
+          <i class="bi bi-list"></i>
+        </button>
+        <div class="navbar-title">
+          <h3>Customer Portal</h3>
+          <p>Manage your cars and services</p>
+        </div>
+      </div>
+      <div class="navbar-right">
+        <button type="button" class="notification-btn">
+          <i class="bi bi-bell"></i>
+          <span class="notification-dot"></span>
+        </button>
+        <div class="navbar-profile">
+          <div class="avatar">{{ getInitials() }}</div>
+          <div class="profile-data">
+            <strong>
+              {{ customer?.fullName || 'Customer' }}</strong>
+            <span> Customer </span>
+          </div>
+          <i class="bi bi-chevron-down profile-arrow"></i>
+        </div>
+      </div>
+    </header>
+    <main class="page-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

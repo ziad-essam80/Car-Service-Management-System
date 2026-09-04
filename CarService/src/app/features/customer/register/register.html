@@ -1,0 +1,367 @@
+<div class="auth-page">
+
+  <!-- Left -->
+
+  <div class="auth-visual">
+
+    <div class="brand">
+
+      <div class="brand-icon">
+        <i class="bi bi-car-front-fill"></i>
+      </div>
+
+      <div>
+        <h2>Car Service</h2>
+        <span>Management System</span>
+      </div>
+
+    </div>
+    <div class="visual-content">
+
+      <span class="small-title">
+        JOIN OUR COMMUNITY
+      </span>
+
+      <h1>
+        Everything your car needs,
+        <span>in one place.</span>
+      </h1>
+
+      <p>
+        Create your account and start managing
+        your vehicles, bookings and maintenance
+        history easily.
+      </p>
+
+
+      <div class="mini-card">
+
+        <div class="mini-icon">
+          <i class="bi bi-check2-circle"></i>
+        </div>
+
+        <div>
+          <strong>Manage all your cars</strong>
+          <span>Keep every vehicle in one account</span>
+        </div>
+
+      </div>
+
+      <div class="mini-card">
+
+        <div class="mini-icon">
+          <i class="bi bi-calendar2-check"></i>
+        </div>
+
+        <div>
+          <strong>Book services anytime</strong>
+          <span>Choose the right date and time</span>
+        </div>
+
+      </div>
+
+      <div class="mini-card">
+
+        <div class="mini-icon">
+          <i class="bi bi-clock-history"></i>
+        </div>
+
+        <div>
+          <strong>Maintenance history</strong>
+          <span>Never lose your service records</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="visual-footer">
+      © 2026 Car Service Management System
+    </div>
+
+  </div>
+
+  <!-- Right -->
+
+  <div class="auth-form-side">
+
+    <div class="form-container">
+
+      <div class="mobile-brand">
+
+        <div class="brand-icon">
+          <i class="bi bi-car-front-fill"></i>
+        </div>
+
+        <strong>
+          Car Service
+        </strong>
+
+      </div>
+
+
+      <div class="form-header">
+
+        <span class="welcome-label">
+          CREATE ACCOUNT
+        </span>
+
+        <h2>
+          Get started today
+        </h2>
+
+        <p>
+          Create your customer account
+          to manage your vehicle services.
+        </p>
+
+      </div>
+
+
+      <form
+        [formGroup]="registerForm"
+        (ngSubmit)="register()"
+      >
+
+        <!-- Name -->
+
+        <div class="form-group">
+
+          <label>
+            Full Name
+          </label>
+
+          <div class="input-box">
+
+            <i class="bi bi-person"></i>
+
+            <input
+              type="text"
+              formControlName="fullName"
+              placeholder="Enter your full name"
+            >
+
+          </div>
+
+          <small
+            class="error"
+            *ngIf="
+              registerForm.get('fullName')?.touched &&
+              registerForm.get('fullName')?.invalid
+            "
+          >
+            Full name is required.
+          </small>
+
+        </div>
+
+
+        <div class="form-row">
+
+          <!-- Email -->
+
+          <div class="form-group">
+
+            <label>
+              Email Address
+            </label>
+
+            <div class="input-box">
+
+              <i class="bi bi-envelope"></i>
+
+              <input
+                type="email"
+                formControlName="email"
+                placeholder="name@example.com"
+              >
+
+            </div>
+
+            <small
+              class="error"
+              *ngIf="
+                registerForm.get('email')?.touched &&
+                registerForm.get('email')?.invalid
+              "
+            >
+              Enter a valid email.
+            </small>
+
+          </div>
+
+
+          <!-- Phone -->
+
+          <div class="form-group">
+
+            <label>
+              Phone Number
+            </label>
+
+            <div class="input-box">
+
+              <i class="bi bi-phone"></i>
+
+              <input
+                type="text"
+                formControlName="phone"
+                placeholder="01xxxxxxxxx"
+              >
+
+            </div>
+
+            <small
+              class="error"
+              *ngIf="
+                registerForm.get('phone')?.touched &&
+                registerForm.get('phone')?.invalid
+              "
+            >
+              Phone number is required.
+            </small>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-row">
+
+          <!-- Password -->
+
+          <div class="form-group">
+
+            <label>
+              Password
+            </label>
+
+            <div class="input-box">
+
+              <i class="bi bi-lock"></i>
+
+              <input
+                [type]="showPassword ? 'text' : 'password'"
+                formControlName="password"
+                placeholder="Minimum 6 characters"
+              >
+
+              <button
+                type="button"
+                class="password-toggle"
+                (click)="togglePassword()"
+              >
+
+                <i
+                  class="bi"
+                  [class.bi-eye]="!showPassword"
+                  [class.bi-eye-slash]="showPassword"
+                ></i>
+
+              </button>
+
+            </div>
+
+            <small
+              class="error"
+              *ngIf="
+                registerForm.get('password')?.touched &&
+                registerForm.get('password')?.invalid
+              "
+            >
+              Password must be at least 6 characters.
+            </small>
+
+          </div>
+
+
+          <!-- Confirm -->
+
+          <div class="form-group">
+
+            <label>
+              Confirm Password
+            </label>
+
+            <div class="input-box">
+
+              <i class="bi bi-shield-lock"></i>
+
+              <input
+                [type]="
+                  showConfirmPassword
+                    ? 'text'
+                    : 'password'
+                "
+                formControlName="confirmPassword"
+                placeholder="Repeat password"
+              >
+
+              <button
+                type="button"
+                class="password-toggle"
+                (click)="toggleConfirmPassword()"
+              >
+
+                <i
+                  class="bi"
+                  [class.bi-eye]="!showConfirmPassword"
+                  [class.bi-eye-slash]="showConfirmPassword"
+                ></i>
+
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="error-message"
+          *ngIf="errorMessage"
+        >
+
+          <i class="bi bi-exclamation-circle"></i>
+
+          {{ errorMessage }}
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="submit-btn"
+          [disabled]="loading"
+        >
+
+          {{
+            loading
+              ? 'Creating Account...'
+              : 'Create Account'
+          }}
+
+          <i
+            class="bi bi-arrow-right"
+            *ngIf="!loading"
+          ></i>
+
+        </button>
+
+      </form>
+
+
+      <div class="login-text">
+
+        Already have an account?
+
+        <a routerLink="/customer/login">
+          Sign in
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

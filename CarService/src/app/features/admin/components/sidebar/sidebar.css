@@ -1,0 +1,286 @@
+@import "bootstrap-icons/font/bootstrap-icons.css";
+* {
+  box-sizing: border-box;
+}
+
+:host {
+  display: block;
+}
+
+
+/* ==============================
+   SIDEBAR
+============================== */
+
+.sidebar {
+  width: 250px;
+  height: 100vh;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(7, 28, 65, 0.96) 0%,
+      rgba(9, 42, 88, 0.94) 45%,
+      rgba(8, 57, 116, 0.88) 100%
+    ),
+    url("/images/sidebar-car.png");
+
+  background-size: 100% auto;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+
+  overflow: hidden;
+  color: white;
+
+  z-index: 1000;
+}
+
+
+.sidebar-logo {
+  height: 115px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+
+.sidebar-logo img {
+  width: 125px;
+  height: auto;
+
+  object-fit: contain;
+
+  filter: drop-shadow(
+    0 4px 12px rgba(0, 110, 255, 0.25)
+  );
+}
+
+
+/* ==============================
+   MENU
+============================== */
+
+.sidebar-menu {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+
+  padding: 5px 12px;
+
+  position: relative;
+
+  z-index: 2;
+}
+
+
+
+.menu-item {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  height: 48px;
+  padding: 0 16px;
+
+  color: #dce7f7;
+  text-decoration: none;
+
+  font-size: 13px;
+
+  border-radius: 9px;
+
+  transition: 0.25s;
+}
+
+.menu-item i {
+  width: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 18px;
+
+  color: #b9d8ff;
+}
+
+.menu-item:hover i {
+  color: white;
+}
+
+.menu-item.active i {
+  color: white;
+}
+
+
+.menu-item i {
+  width: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 18px;
+
+  color: #d9e5f6;
+
+  transition: 0.25s;
+}
+
+
+.menu-item span {
+  white-space: nowrap;
+}
+
+
+/* ==============================
+   HOVER
+============================== */
+
+.menu-item:hover {
+  background: rgba(255, 255, 255, 0.07);
+
+  color: white;
+
+  transform: translateX(3px);
+}
+
+
+.menu-item:hover i {
+  color: #4ca4ff;
+}
+
+
+/* ==============================
+   ACTIVE
+============================== */
+
+.menu-item.active {
+  color: white;
+
+  background:
+    linear-gradient(
+      90deg,
+      #086fe0,
+      #0963c4
+    );
+
+  box-shadow:
+    0 6px 18px rgba(0, 102, 255, 0.25);
+
+  font-weight: 600;
+}
+
+
+.menu-item.active i {
+  color: white;
+}
+
+
+/* خط صغير جنب العنصر النشط */
+
+.menu-item.active::before {
+  content: "";
+
+  width: 3px;
+  height: 24px;
+
+  background: white;
+
+  border-radius: 10px;
+
+  margin-left: -10px;
+}
+
+
+/* ==============================
+   LOGOUT
+============================== */
+
+.logout {
+  margin-top: auto;
+
+  min-height: 70px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 0 27px;
+
+  color: #f2f6fc;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  position: relative;
+
+  z-index: 3;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  background:
+    rgba(1, 10, 33, 0.42);
+
+  transition: 0.25s;
+}
+
+
+.logout i {
+  font-size: 19px;
+}
+
+
+.logout:hover {
+  background:
+    rgba(255, 255, 255, 0.07);
+
+  color: #ff7474;
+}
+
+
+/* ==============================
+   BACKGROUND DARK EFFECT
+============================== */
+
+.sidebar::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 310px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(2, 15, 45, 0) 0%,
+      rgba(2, 15, 45, 0.08) 45%,
+      rgba(1, 10, 32, 0.45) 100%
+    );
+
+  pointer-events: none;
+
+  z-index: 1;
+}

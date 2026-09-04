@@ -1,0 +1,431 @@
+<div class="tracking-page">
+
+  <!-- Loading -->
+
+  <div
+    class="loading"
+    *ngIf="loading"
+  >
+    Loading service tracking...
+  </div>
+
+
+  <div
+    class="tracking-container"
+    *ngIf="!loading && tracking"
+  >
+
+    <!-- =========================
+         Header
+    ========================== -->
+
+    <div class="page-header">
+
+      <div>
+
+        <span class="page-label">
+          SERVICE TRACKING
+        </span>
+
+        <h1>
+          Track Your Service
+        </h1>
+
+        <p>
+          Follow your vehicle through every
+          stage of the maintenance process.
+        </p>
+
+      </div>
+
+
+      <div class="booking-number">
+
+        <span>
+          BOOKING
+        </span>
+
+        <strong>
+          #{{ bookingId }}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         Current Status
+    ========================== -->
+
+    <div class="status-card">
+
+      <div class="status-icon">
+
+        <i class="bi bi-tools"></i>
+
+      </div>
+
+
+      <div class="status-info">
+
+        <span>
+          CURRENT STATUS
+        </span>
+
+        <h2>
+          {{ tracking.status }}
+        </h2>
+
+        <p>
+          Your vehicle's service progress
+          is updated by the service center.
+        </p>
+
+      </div>
+
+
+      <div class="live-badge">
+
+        <span></span>
+
+        Live Status
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         Timeline
+    ========================== -->
+
+    <div class="timeline-card">
+
+      <div class="card-header">
+
+        <div>
+
+          <span class="section-label">
+            SERVICE PROGRESS
+          </span>
+
+          <h3>
+            Maintenance Timeline
+          </h3>
+
+          <p>
+            Track each stage from booking
+            until your vehicle is ready.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="timeline">
+
+        <div
+          class="timeline-item"
+          *ngFor="
+            let step of tracking.tracking;
+            let i = index;
+            let last = last
+          "
+          [class.completed]="step.completed"
+          [class.current]="step.current"
+          [class.pending]="step.pending"
+        >
+
+          <!-- Left Line -->
+
+          <div class="timeline-left">
+
+            <div class="step-circle">
+
+              <!-- Completed -->
+
+              <i
+                class="bi bi-check-lg"
+                *ngIf="step.completed"
+              ></i>
+
+
+              <!-- Current -->
+
+              <i
+                class="bi bi-tools"
+                *ngIf="step.current"
+              ></i>
+
+
+              <!-- Pending -->
+
+              <span
+                *ngIf="step.pending"
+              >
+                {{ i + 1 }}
+              </span>
+
+            </div>
+
+
+            <div
+              class="timeline-line"
+              *ngIf="!last"
+            ></div>
+
+          </div>
+
+
+          <!-- Step Content -->
+
+          <div class="step-content">
+
+            <div class="step-title">
+
+              <div>
+
+                <span class="step-number">
+                  STEP {{ i + 1 }}
+                </span>
+
+                <h4>
+                  {{ step.name }}
+                </h4>
+
+              </div>
+
+
+              <!-- Completed Badge -->
+
+              <span
+                class="step-badge completed-badge"
+                *ngIf="step.completed"
+              >
+                Completed
+              </span>
+
+
+              <!-- Current Badge -->
+
+              <span
+                class="step-badge current-badge"
+                *ngIf="step.current"
+              >
+                Current
+              </span>
+
+
+              <!-- Pending Badge -->
+
+              <span
+                class="step-badge pending-badge"
+                *ngIf="step.pending"
+              >
+                Pending
+              </span>
+
+            </div>
+
+
+            <!-- Description -->
+
+            <p *ngIf="step.name === 'Booked'">
+              Your service appointment has been created.
+            </p>
+
+            <p *ngIf="step.name === 'Confirmed'">
+              Your booking has been confirmed by the service center.
+            </p>
+
+            <p *ngIf="step.name === 'Vehicle Received'">
+              Your vehicle has arrived at the service center.
+            </p>
+
+            <p *ngIf="step.name === 'Inspection'">
+              Our team is inspecting your vehicle.
+            </p>
+
+            <p *ngIf="step.name === 'In Service'">
+              Your vehicle is currently being serviced.
+            </p>
+
+            <p *ngIf="step.name === 'Quality Check'">
+              Final service quality checks are being completed.
+            </p>
+
+            <p *ngIf="step.name === 'Ready for Pickup'">
+              Your vehicle is ready for pickup.
+            </p>
+
+            <p *ngIf="step.name === 'Completed'">
+              Your service has been successfully completed.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         Additional Information
+    ========================== -->
+
+    <div class="info-grid">
+
+
+      <!-- Inspection Notes -->
+
+      <div class="info-card">
+
+        <div class="info-card-header">
+
+          <div class="info-icon">
+
+            <i class="bi bi-clipboard-check"></i>
+
+          </div>
+
+
+          <div>
+
+            <span>
+              WORKSHOP
+            </span>
+
+            <h3>
+              Inspection Notes
+            </h3>
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="notes-content"
+          *ngIf="tracking.inspectionNotes"
+        >
+
+          {{ tracking.inspectionNotes }}
+
+        </div>
+
+
+        <div
+          class="no-info"
+          *ngIf="!tracking.inspectionNotes"
+        >
+
+          <i class="bi bi-info-circle"></i>
+
+          No inspection notes available yet.
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Final Cost -->
+
+      <div class="info-card">
+
+        <div class="info-card-header">
+
+          <div class="info-icon cost">
+
+            <i class="bi bi-cash-stack"></i>
+
+          </div>
+
+
+          <div>
+
+            <span>
+              SERVICE COST
+            </span>
+
+            <h3>
+              Final Cost
+            </h3>
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="cost-content"
+          *ngIf="
+            tracking.finalCost !== null &&
+            tracking.finalCost !== undefined
+          "
+        >
+
+          <strong>
+            {{ tracking.finalCost }}
+          </strong>
+
+          <span>
+            EGP
+          </span>
+
+        </div>
+
+
+        <div
+          class="no-info"
+          *ngIf="
+            tracking.finalCost === null ||
+            tracking.finalCost === undefined
+          "
+        >
+
+          <i class="bi bi-info-circle"></i>
+
+          Final cost will appear after service completion.
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =========================
+       Error / Empty
+  ========================== -->
+
+  <div
+    class="empty-state"
+    *ngIf="!loading && !tracking"
+  >
+
+    <div class="empty-icon">
+
+      <i class="bi bi-exclamation-circle"></i>
+
+    </div>
+
+    <h3>
+      Tracking information not found
+    </h3>
+
+    <p>
+      We couldn't find tracking information
+      for this booking.
+    </p>
+
+  </div>
+
+</div>

@@ -1,0 +1,75 @@
+<div class="services-page">
+  <div class="page-header">
+    <div>
+      <h2>Service Jobs</h2>
+
+      <p>Manage vehicle services and update their progress.</p>
+    </div>
+  </div>
+
+  <div class="services-card">
+    <div class="services-card-header">
+      <div>
+        <h3>Current Services</h3>
+
+        <p>Track and update all current service jobs</p>
+      </div>
+    </div>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Vehicle</th>
+            <th>Customer</th>
+            <th>Service</th>
+            <th>Mechanic</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let job of jobs">
+            <td>
+              <div class="vehicle-info">
+                <div class="car-icon">
+                  <i class="bi bi-car-front-fill"></i>
+                </div>
+
+                <div>
+                  <strong>
+                    {{ job.vehicle }}
+                  </strong>
+
+                  <span>
+                    {{ job.plateNumber }}
+                  </span>
+                </div>
+              </div>
+            </td>
+            <td>{{ job.customer }}</td>
+            <td>{{ job.service }}</td>
+            <td>{{ job.mechanic }}</td>
+            <td>
+              <span class="status" [ngClass]="getStatusClass(job.status)">
+                {{ job.status }}
+              </span>
+            </td>
+            <td>
+              <button
+                class="next-btn"
+                [ngClass]="getActionButtonClass(job.status)"
+                [disabled]="job.status === 'Completed'"
+                (click)="moveToNextStatus(job)">
+                <i class="bi"[ngClass]="job.status === 'Completed' ? 'bi-check-circle-fill' : 'bi-arrow-right'"></i>
+                {{ getNextStatusText(job.status) }}</button>
+            </td>
+          </tr>
+          <tr *ngIf="jobs.length === 0">
+            <td colspan="6" class="no-data">No service jobs found.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

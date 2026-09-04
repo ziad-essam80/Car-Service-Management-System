@@ -1,0 +1,315 @@
+<div class="bookings-page">
+
+  <!-- Header -->
+
+  <div class="page-header">
+
+    <div>
+
+      <span class="page-label">
+        SERVICE APPOINTMENTS
+      </span>
+
+      <h1>
+        My Bookings
+      </h1>
+
+      <p>
+        View and track all your service appointments.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- Filters -->
+
+<div class="filters">
+
+  <button
+    type="button"
+    [class.active]="selectedFilter === 'all'"
+    (click)="filterBookings('all')"
+  >
+    All
+  </button>
+
+
+  <button
+    type="button"
+    [class.active]="selectedFilter === 'active'"
+    (click)="filterBookings('active')"
+  >
+    Active
+  </button>
+
+
+  <button
+    type="button"
+    [class.active]="selectedFilter === 'completed'"
+    (click)="filterBookings('completed')"
+  >
+    Completed
+  </button>
+
+</div>
+
+
+  <!-- Loading -->
+
+  <div
+    class="loading"
+    *ngIf="loading"
+  >
+    Loading bookings...
+  </div>
+
+
+  <!-- Bookings -->
+
+  <div
+    class="bookings-list"
+    *ngIf="
+      !loading &&
+      filteredBookings.length > 0
+    "
+  >
+
+    <div
+      class="booking-card"
+      *ngFor="let booking of filteredBookings"
+    >
+
+      <!-- Top -->
+
+      <div class="booking-top">
+
+        <div class="booking-id">
+
+          <div class="booking-icon">
+
+            <i class="bi bi-calendar-check"></i>
+
+          </div>
+
+
+          <div>
+
+            <span>
+              BOOKING
+            </span>
+
+            <strong>
+              #{{ booking.id }}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <span
+          class="status-badge"
+          [ngClass]="getStatusClass(booking.status)"
+        >
+          {{ booking.status }}
+        </span>
+
+      </div>
+
+
+      <!-- Main -->
+
+      <div class="booking-main">
+
+        <!-- Vehicle -->
+
+        <div class="vehicle-section">
+
+          <div class="vehicle-icon">
+
+            <i class="bi bi-car-front-fill"></i>
+
+          </div>
+
+
+          <div>
+
+            <span>
+              VEHICLE
+            </span>
+
+            <h3>
+              {{ booking.vehicle }}
+            </h3>
+
+            <p>
+              {{ booking.plateNumber }}
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- Service -->
+
+        <div class="service-section">
+
+          <span>
+            SERVICE
+          </span>
+
+          <strong>
+            {{ booking.serviceName }}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <!-- Details -->
+
+      <div class="booking-details">
+
+        <div>
+
+          <i class="bi bi-calendar3"></i>
+
+          <div>
+
+            <span>
+              Date
+            </span>
+
+            <strong>
+              {{ booking.date }}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <i class="bi bi-clock"></i>
+
+          <div>
+
+            <span>
+              Time
+            </span>
+
+            <strong>
+              {{ booking.time }}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <i class="bi bi-cash-stack"></i>
+
+          <div>
+
+            <span>
+              Total Price
+            </span>
+
+            <strong class="price">
+              {{ booking.totalPrice }} EGP
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Bottom -->
+
+      <div class="booking-actions">
+
+        <button
+          type="button"
+          class="track-btn"
+          *ngIf="booking.status !== 'Completed'"
+          (click)="trackBooking(booking.id)"
+        >
+
+          <i class="bi bi-geo-alt"></i>
+
+          Track Service
+
+        </button>
+
+
+        <button
+          type="button"
+          class="completed-track-btn"
+          *ngIf="booking.status === 'Completed'"
+          (click)="trackBooking(booking.id)"
+        >
+
+          <i class="bi bi-check-circle"></i>
+
+          View Details
+
+        </button>
+
+
+        <button
+          type="button"
+          class="invoice-btn"
+          *ngIf="booking.status === 'Completed'"
+          (click)="viewInvoice(booking.id)"
+        >
+
+          <i class="bi bi-receipt"></i>
+
+          Invoice
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Empty -->
+
+  <div
+    class="empty-state"
+    *ngIf="
+      !loading &&
+      filteredBookings.length === 0
+    "
+  >
+
+    <div class="empty-icon">
+
+      <i class="bi bi-calendar-x"></i>
+
+    </div>
+
+    <h3>
+      No bookings found
+    </h3>
+
+    <p>
+      You don't have any bookings
+      in this section yet.
+    </p>
+
+  </div>
+
+</div>

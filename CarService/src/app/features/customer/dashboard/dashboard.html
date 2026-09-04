@@ -1,0 +1,471 @@
+<div class="dashboard-page">
+
+  <!-- Loading -->
+
+  <div
+    class="loading"
+    *ngIf="loading"
+  >
+    Loading dashboard...
+  </div>
+
+
+  <div *ngIf="!loading">
+
+    <!-- Welcome -->
+
+    <section class="welcome-section">
+
+      <div class="welcome-content">
+
+        <span class="welcome-label">
+          CUSTOMER DASHBOARD
+        </span>
+
+        <h1>
+          Welcome back,
+          <span>
+            {{ customer?.fullName || 'Customer' }}
+          </span>
+        </h1>
+
+        <p>
+          Here's what's happening with your
+          cars and service appointments.
+        </p>
+
+      </div>
+
+
+      <div class="welcome-car">
+
+        <div class="car-circle">
+
+          <i class="bi bi-car-front-fill"></i>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- Stats -->
+
+    <section class="stats-grid">
+
+      <!-- Cars -->
+
+      <div
+        class="stat-card"
+        (click)="goToCars()"
+      >
+
+        <div class="stat-top">
+
+          <div class="stat-icon blue">
+
+            <i class="bi bi-car-front-fill"></i>
+
+          </div>
+
+          <span class="view-text">
+            View
+            <i class="bi bi-arrow-up-right"></i>
+          </span>
+
+        </div>
+
+
+        <div class="stat-info">
+
+          <h2>
+            {{ totalCars }}
+          </h2>
+
+          <p>
+            Total Cars
+          </p>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Active Bookings -->
+
+      <div
+        class="stat-card"
+        (click)="goToBookings()"
+      >
+
+        <div class="stat-top">
+
+          <div class="stat-icon orange">
+
+            <i class="bi bi-calendar-check"></i>
+
+          </div>
+
+          <span class="view-text">
+            View
+            <i class="bi bi-arrow-up-right"></i>
+          </span>
+
+        </div>
+
+
+        <div class="stat-info">
+
+          <h2>
+            {{ activeBookings }}
+          </h2>
+
+          <p>
+            Active Bookings
+          </p>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Completed -->
+
+      <div class="stat-card">
+
+        <div class="stat-top">
+
+          <div class="stat-icon green">
+
+            <i class="bi bi-check-circle-fill"></i>
+
+          </div>
+
+        </div>
+
+
+        <div class="stat-info">
+
+          <h2>
+            {{ completedBookings }}
+          </h2>
+
+          <p>
+            Completed Services
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- Main Grid -->
+
+    <section class="dashboard-grid">
+
+      <!-- Upcoming Booking -->
+
+      <div class="dashboard-card booking-card">
+
+        <div class="card-header">
+
+          <div>
+
+            <span class="section-label">
+              NEXT APPOINTMENT
+            </span>
+
+            <h3>
+              Upcoming Booking
+            </h3>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="text-btn"
+            (click)="goToBookings()"
+          >
+            View All
+          </button>
+
+        </div>
+
+
+
+        <!-- Has Booking -->
+
+        <div
+          class="upcoming-booking"
+          *ngIf="upcomingBooking"
+        >
+
+          <div class="booking-main">
+
+            <div class="booking-icon">
+
+              <i class="bi bi-tools"></i>
+
+            </div>
+
+
+            <div>
+
+              <span class="booking-service-label">
+                SERVICE
+              </span>
+
+              <h4>
+                {{ upcomingBooking.serviceName }}
+              </h4>
+
+              <p>
+                {{ upcomingBooking.vehicle }}
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="booking-details">
+
+            <div>
+
+              <i class="bi bi-calendar3"></i>
+
+              <div>
+
+                <span>Date</span>
+
+                <strong>
+                  {{ upcomingBooking.date }}
+                </strong>
+
+              </div>
+
+            </div>
+
+
+            <div>
+
+              <i class="bi bi-clock"></i>
+
+              <div>
+
+                <span>Time</span>
+
+                <strong>
+                  {{ upcomingBooking.time }}
+                </strong>
+
+              </div>
+
+            </div>
+
+
+            <div>
+
+              <i class="bi bi-car-front"></i>
+
+              <div>
+
+                <span>Plate Number</span>
+
+                <strong>
+                  {{ upcomingBooking.plateNumber }}
+                </strong>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="booking-bottom">
+
+            <span class="status-badge">
+              {{ upcomingBooking.status }}
+            </span>
+
+
+            <button
+              type="button"
+              class="track-btn"
+              (click)="trackBooking()"
+            >
+
+              Track Service
+
+              <i class="bi bi-arrow-right"></i>
+
+            </button>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- No Booking -->
+
+        <div
+          class="no-booking"
+          *ngIf="!upcomingBooking"
+        >
+
+          <div class="empty-icon">
+
+            <i class="bi bi-calendar-plus"></i>
+
+          </div>
+
+          <h4>
+            No upcoming bookings
+          </h4>
+
+          <p>
+            Your next service appointment
+            will appear here.
+          </p>
+
+          <button
+            type="button"
+            (click)="goToServices()"
+          >
+            Browse Services
+          </button>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Quick Actions -->
+
+      <div class="dashboard-card quick-card">
+
+        <div class="card-header">
+
+          <div>
+
+            <span class="section-label">
+              SHORTCUTS
+            </span>
+
+            <h3>
+              Quick Actions
+            </h3>
+
+          </div>
+
+        </div>
+
+
+        <div class="quick-actions">
+
+          <button
+            type="button"
+            class="quick-action"
+            (click)="goToServices()"
+          >
+
+            <div class="quick-icon">
+
+              <i class="bi bi-calendar-plus"></i>
+
+            </div>
+
+            <div>
+
+              <strong>
+                Book a Service
+              </strong>
+
+              <span>
+                Schedule maintenance
+              </span>
+
+            </div>
+
+            <i class="bi bi-chevron-right"></i>
+
+          </button>
+
+
+          <button
+            type="button"
+            class="quick-action"
+            (click)="goToCars()"
+          >
+
+            <div class="quick-icon">
+
+              <i class="bi bi-car-front"></i>
+
+            </div>
+
+            <div>
+
+              <strong>
+                My Cars
+              </strong>
+
+              <span>
+                Manage your vehicles
+              </span>
+
+            </div>
+
+            <i class="bi bi-chevron-right"></i>
+
+          </button>
+
+
+          <button
+            type="button"
+            class="quick-action"
+            (click)="goToBookings()"
+          >
+
+            <div class="quick-icon">
+
+              <i class="bi bi-clock-history"></i>
+
+            </div>
+
+            <div>
+
+              <strong>
+                My Bookings
+              </strong>
+
+              <span>
+                View your appointments
+              </span>
+
+            </div>
+
+            <i class="bi bi-chevron-right"></i>
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</div>

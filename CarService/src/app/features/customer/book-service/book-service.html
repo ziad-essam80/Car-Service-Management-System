@@ -1,0 +1,301 @@
+<div class="booking-page">
+
+  <div class="booking-container">
+
+    <button
+      type="button"
+      class="back-btn"
+      (click)="goBack()"
+    >
+      <i class="bi bi-arrow-left"></i>
+      Back to Services
+    </button>
+
+
+    <div class="page-header">
+
+      <p>BOOK APPOINTMENT</p>
+
+      <h2>
+        Book Your Service
+      </h2>
+
+      <span>
+        Choose your car, service, date and time.
+      </span>
+
+    </div>
+
+
+    <div class="booking-content">
+
+      <!-- Form -->
+
+      <div class="form-card">
+
+        <form
+          [formGroup]="bookingForm"
+          (ngSubmit)="confirmBooking()"
+        >
+
+          <!-- Car -->
+
+          <div class="form-group">
+
+            <label>
+              Select Car
+            </label>
+
+            <select
+              class="form-control"
+              formControlName="carId"
+            >
+
+              <option value="">
+                Choose your car
+              </option>
+
+              <option
+                *ngFor="let car of cars"
+                [value]="car.id"
+              >
+                {{ car.brand }}
+                {{ car.model }}
+                -
+                {{ car.plateNumber }}
+              </option>
+
+            </select>
+
+            <small
+              class="error"
+              *ngIf="
+                bookingForm.get('carId')?.touched &&
+                bookingForm.get('carId')?.invalid
+              "
+            >
+              Please select a car.
+            </small>
+
+          </div>
+
+
+          <!-- Service -->
+
+          <div class="form-group">
+
+            <label>
+              Select Service
+            </label>
+
+            <select
+              class="form-control"
+              formControlName="serviceId"
+              (change)="serviceChanged()"
+            >
+
+              <option value="">
+                Choose a service
+              </option>
+
+              <option
+                *ngFor="let service of services"
+                [value]="service.id"
+              >
+                {{ service.name }}
+                -
+                {{ service.price }} EGP
+              </option>
+
+            </select>
+
+            <small
+              class="error"
+              *ngIf="
+                bookingForm.get('serviceId')?.touched &&
+                bookingForm.get('serviceId')?.invalid
+              "
+            >
+              Please select a service.
+            </small>
+
+          </div>
+
+
+          <div class="form-row">
+
+            <!-- Date -->
+
+            <div class="form-group">
+
+              <label>
+                Date
+              </label>
+
+              <input
+                type="date"
+                class="form-control"
+                formControlName="date"
+                [min]="minDate"
+              >
+
+              <small
+                class="error"
+                *ngIf="
+                  bookingForm.get('date')?.touched &&
+                  bookingForm.get('date')?.invalid
+                "
+              >
+                Please select a date.
+              </small>
+
+            </div>
+
+
+            <!-- Time -->
+
+            <div class="form-group">
+
+              <label>
+                Time
+              </label>
+
+              <input
+                type="time"
+                class="form-control"
+                formControlName="time"
+              >
+
+              <small
+                class="error"
+                *ngIf="
+                  bookingForm.get('time')?.touched &&
+                  bookingForm.get('time')?.invalid
+                "
+              >
+                Please select a time.
+              </small>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-actions">
+
+            <button
+              type="button"
+              class="cancel-btn"
+              (click)="goBack()"
+            >
+              Cancel
+            </button>
+
+
+            <button
+              type="submit"
+              class="confirm-btn"
+              [disabled]="loading"
+            >
+
+              <i class="bi bi-calendar-check"></i>
+
+              {{
+                loading
+                  ? 'Booking...'
+                  : 'Confirm Booking'
+              }}
+
+            </button>
+
+          </div>
+
+        </form>
+
+      </div>
+
+
+      <!-- Summary -->
+
+      <div class="summary-card">
+
+        <h3>
+          Booking Summary
+        </h3>
+
+
+        <div
+          class="selected-service"
+          *ngIf="selectedService"
+        >
+
+          <div class="summary-icon">
+            <i class="bi bi-tools"></i>
+          </div>
+
+          <div>
+
+            <span>
+              Selected Service
+            </span>
+
+            <strong>
+              {{ selectedService.name }}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="summary-row">
+
+          <span>
+            Service Price
+          </span>
+
+          <strong>
+            {{
+              selectedService?.price || 0
+            }}
+            EGP
+          </strong>
+
+        </div>
+
+
+        <div class="summary-row">
+
+          <span>
+            Estimated Time
+          </span>
+
+          <strong>
+            {{
+              selectedService?.estimatedTime || 0
+            }}
+            min
+          </strong>
+
+        </div>
+
+
+        <div class="summary-note">
+
+          <i class="bi bi-info-circle"></i>
+
+          <p>
+            Your booking will start with
+            the status
+            <strong>Booked</strong>.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

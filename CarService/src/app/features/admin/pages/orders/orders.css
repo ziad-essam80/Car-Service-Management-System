@@ -1,0 +1,236 @@
+.services-page {
+  padding: 20px;
+}
+
+.page-header {
+  margin-bottom: 20px;
+}
+
+.page-header h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.page-header p {
+  margin-top: 5px;
+  color: #8792a5;
+  font-size: 13px;
+}
+
+
+.services-card {
+  background: #fff;
+
+  border: 1px solid #e4e8ef;
+  border-radius: 14px;
+
+  overflow: hidden;
+}
+
+.services-card-header {
+  padding: 20px;
+
+  border-bottom: 1px solid #e8ebf1;
+}
+
+.services-card-header h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.services-card-header p {
+  margin: 5px 0 0;
+  color: #8792a5;
+  font-size: 12px;
+}
+
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+
+  padding: 15px 20px;
+
+  background: #f8f9fc;
+
+  color: #667085;
+
+  font-size: 12px;
+  font-weight: 500;
+}
+
+td {
+  padding: 16px 20px;
+
+  border-bottom: 1px solid #edf0f4;
+
+  font-size: 13px;
+}
+
+
+.vehicle-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.car-icon {
+  width: 40px;
+  height: 40px;
+
+  border-radius: 9px;
+
+  background: #eaf1ff;
+  color: #1769ff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 18px;
+}
+
+.vehicle-info strong {
+  display: block;
+}
+
+.vehicle-info span {
+  display: block;
+
+  color: #8993a4;
+
+  font-size: 11px;
+
+  margin-top: 3px;
+}
+
+
+/* Status */
+
+.status {
+  padding: 6px 14px;
+
+  border-radius: 20px;
+
+  font-size: 11px;
+}
+
+.status.pending {
+  background: #eaf1ff;
+  color: #1769ff;
+}
+
+.status.progress {
+  background: #fff0e5;
+  color: #ff7628;
+}
+
+.status.completed {
+  background: #e5f8ef;
+  color: #18a566;
+}
+
+
+/* Next button */
+
+.next-btn {
+  min-width: 125px;
+  height: 36px;
+
+  padding: 0 13px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #1769ff;
+  color: white;
+
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  font-size: 12px;
+}
+
+.next-btn.complete-btn {
+  background: #ff7628;
+}
+
+.next-btn:disabled {
+  background: #e4e8ef;
+  color: #8993a4;
+
+  cursor: not-allowed;
+}
+
+.no-data {
+  text-align: center;
+
+  padding: 35px;
+
+  color: #8993a4;
+}
+
+
+.status {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+/* Status colors */
+
+.status-booked {
+  background: #eaf1ff;
+  color: #1769ff;
+}
+
+.status-confirmed {
+  background: #eef7ff;
+  color: #0f6cbd;
+}
+
+.status-received {
+  background: #fff3e6;
+  color: #ff8a00;
+}
+
+.status-inspection {
+  background: #f3ecff;
+  color: #7c3aed;
+}
+
+.status-service {
+  background: #fff0e5;
+  color: #ff7628;
+}
+
+.status-quality {
+  background: #e8f7ef;
+  color: #18a566;
+}
+
+.status-pickup {
+  background: #fff7db;
+  color: #c58b00;
+}
+
+.status-completed {
+  background: #e5f8ef;
+  color: #18a566;
+}

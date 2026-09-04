@@ -1,0 +1,196 @@
+<div class="dashboard-page">
+  <main class="main-content">
+    <div class="stats-grid">
+      <div class="stat-card" *ngFor="let stat of stats">
+        <div class="stat-icon">
+          <img [src]="stat.image" [alt]="stat.title" />
+        </div>
+
+        <div class="stat-info">
+          <span class="stat-title">
+            {{ stat.title }}
+          </span>
+
+          <h2>
+            {{ stat.value }}
+          </h2>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="overview-grid">
+      <div class="card-box service-overview">
+        <div class="card-header">
+          <h3>Service Overview</h3>
+
+          <select>
+            <option>This Month</option>
+            <option>Last Month</option>
+            <option>This Year</option>
+          </select>
+        </div>
+
+        <div class="service-content">
+          <div class="donut-chart">
+            <div class="donut-hole"></div>
+          </div>
+
+          <div class="service-list">
+            <div class="service-row" *ngFor="let service of serviceOverview">
+              <div class="service-name">
+                <span class="dot" [style.background]="service.color"></span>
+
+                {{ service.name }}
+              </div>
+
+              <span class="service-number">
+                {{ service.value }}
+              </span>
+
+              <span
+                class="percentage"
+                [style.background]="service.background"
+                [style.color]="service.color">{{ service.percentage }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-box appointments">
+        <div class="card-header">
+          <h3>Today's Appointments</h3>
+          <a>View All</a>
+        </div>
+
+        <div class="appointment-row" *ngFor="let appointment of appointments">
+          <div class="appointment-time">{{ appointment.time }}</div>
+
+          <img [src]="appointment.image" class="car-small" alt="" />
+          <div class="vehicle-info">
+            <strong>{{ appointment.vehicle }}</strong>
+            <span>
+              {{ appointment.customer }}
+            </span>
+          </div>
+          <div class="appointment-service">
+            {{ appointment.service }}
+          </div>
+          <span class="status" [ngClass]="appointment.statusClass">
+            {{ appointment.status }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="bottom-layout">
+      <div class="card-box jobs-card">
+        <div class="card-header">
+          <h3>Current Service Jobs</h3>
+
+          <a>View All</a>
+        </div>
+
+        <div class="jobs-table">
+          <div class="table-row table-header">
+            <span>Vehicle</span>
+            <span>Customer</span>
+            <span>Service</span>
+            <span>Mechanic</span>
+            <span>Status</span>
+          </div>
+
+          <div class="table-row" *ngFor="let job of jobs">
+            <div class="vehicle-cell">
+              <img [src]="job.image" />
+
+              <strong>
+                {{ job.vehicle }}
+              </strong>
+            </div>
+
+            <span>
+              {{ job.customer }}
+            </span>
+
+            <span>
+              {{ job.service }}
+            </span>
+
+            <div class="mechanic">
+              <img [src]="job.mechanicImage" />
+
+              <span>
+                {{ job.mechanic }}
+              </span>
+            </div>
+
+            <div>
+              <span class="status" [ngClass]="job.statusClass">
+                {{ job.status }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="right-column">
+        <div class="card-box mechanic-card">
+          <div class="card-header">
+            <h3>Mechanics Performance</h3>
+            <a>View All</a>
+          </div>
+
+          <div class="mechanic-performance" *ngFor="let mechanic of mechanics">
+            <div class="mechanic-name">
+              <img [src]="mechanic.image" />
+
+              <span>
+                {{ mechanic.name }}
+              </span>
+            </div>
+
+            <div class="performance-bar">
+              <div class="performance-value" [style.width.%]="mechanic.percentage"></div>
+            </div>
+
+            <span class="performance-number">
+              {{ mechanic.value }}
+            </span>
+          </div>
+        </div>
+
+        <div class="card-box inventory-card">
+          <div class="card-header">
+            <h3>Inventory Alerts</h3>
+
+            <a>View All</a>
+          </div>
+
+          <div class="inventory-item" *ngFor="let item of inventory">
+            <div class="inventory-icon">
+              <i [class]="item.icon"></i>
+            </div>
+
+            <div class="inventory-info">
+              <strong>
+                {{ item.name }}
+              </strong>
+
+              <span>
+                {{ item.stock }}
+              </span>
+            </div>
+
+            <span class="stock-status" [ngClass]="item.statusClass">
+              {{ item.status }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

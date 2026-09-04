@@ -1,0 +1,150 @@
+<div class="services-page">
+
+  <div class="page-header">
+
+    <div>
+      <p class="page-subtitle">CAR SERVICES</p>
+
+      <h2>
+        Choose the right service
+        <br>
+        for your car
+      </h2>
+
+      <p class="header-description">
+        Browse our available maintenance services
+        and book the service your car needs.
+      </p>
+    </div>
+
+  </div>
+
+
+  <div
+    class="loading"
+    *ngIf="loading"
+  >
+    Loading services...
+  </div>
+
+
+  <!-- Services -->
+
+  <div
+    class="services-grid"
+    *ngIf="!loading"
+  >
+
+    <div
+      class="service-card"
+      *ngFor="let service of services"
+    >
+
+      <div class="service-icon">
+
+        <i class="bi bi-tools"></i>
+
+      </div>
+
+
+      <div class="service-content">
+
+        <h3>
+          {{ service.name }}
+        </h3>
+
+
+        <p class="description">
+
+          {{
+            service.description ||
+            'Professional car maintenance service.'
+          }}
+
+        </p>
+
+
+        <div class="service-info">
+
+          <div class="info-item">
+
+            <i class="bi bi-clock"></i>
+
+            <div>
+
+              <span>
+                Estimated Time
+              </span>
+
+              <strong>
+                {{ service.estimatedTime || 0 }} min
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <i class="bi bi-cash-stack"></i>
+
+            <div>
+
+              <span>
+                Price
+              </span>
+
+              <strong>
+                {{ service.price }} EGP
+              </strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="card-actions">
+
+
+          <button
+            class="book-btn"
+            type="button"
+            (click)="bookService(service.id)"
+          >
+
+            Book Service
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Empty -->
+
+  <div
+    class="empty-state"
+    *ngIf="!loading && services.length === 0"
+  >
+
+    <i class="bi bi-tools"></i>
+
+    <h3>
+      No services available
+    </h3>
+
+    <p>
+      There are no active services right now.
+    </p>
+
+  </div>
+
+</div>

@@ -1,0 +1,448 @@
+<div class="profile-page">
+
+  <!-- Loading -->
+
+  <div
+    class="loading"
+    *ngIf="loading"
+  >
+    Loading profile...
+  </div>
+
+
+  <div
+    class="profile-container"
+    *ngIf="!loading"
+  >
+
+    <!-- Header -->
+
+    <div class="page-header">
+
+      <div>
+
+        <span class="page-label">
+          ACCOUNT SETTINGS
+        </span>
+
+        <h1>
+          My Profile
+        </h1>
+
+        <p>
+          Manage your personal information
+          and account details.
+        </p>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="edit-btn"
+        *ngIf="!editMode"
+        (click)="enableEdit()"
+      >
+
+        <i class="bi bi-pencil-square"></i>
+
+        Edit Profile
+
+      </button>
+
+    </div>
+
+
+
+    <div class="profile-grid">
+
+      <!-- Left Profile Card -->
+
+      <div class="profile-card">
+
+        <div class="profile-cover">
+
+          <div class="cover-circle circle-one"></div>
+
+          <div class="cover-circle circle-two"></div>
+
+        </div>
+
+
+        <div class="profile-main">
+
+          <div class="avatar">
+
+            {{ getInitials() }}
+
+          </div>
+
+
+          <h2>
+            {{ customer?.fullName }}
+          </h2>
+
+
+          <p>
+            {{ customer?.email }}
+          </p>
+
+
+          <span class="customer-badge">
+
+            <i class="bi bi-person-check"></i>
+
+            Customer Account
+
+          </span>
+
+        </div>
+
+
+        <div class="profile-info">
+
+          <div class="info-row">
+
+            <div class="info-icon">
+
+              <i class="bi bi-envelope"></i>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                Email Address
+              </span>
+
+              <strong>
+                {{ customer?.email }}
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <div class="info-row">
+
+            <div class="info-icon">
+
+              <i class="bi bi-phone"></i>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                Phone Number
+              </span>
+
+              <strong>
+                {{ customer?.phone }}
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <div class="info-row">
+
+            <div class="info-icon">
+
+              <i class="bi bi-shield-check"></i>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                Account Status
+              </span>
+
+              <strong class="active">
+                Active
+              </strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Right Form -->
+
+      <div class="details-card">
+
+        <div class="card-header">
+
+          <div>
+
+            <span>
+              PERSONAL INFORMATION
+            </span>
+
+            <h3>
+              Account Details
+            </h3>
+
+            <p>
+              Update your basic account information.
+            </p>
+
+          </div>
+
+
+          <div
+            class="edit-status"
+            *ngIf="editMode"
+          >
+
+            <span></span>
+
+            Editing
+
+          </div>
+
+        </div>
+
+
+        <form
+          [formGroup]="profileForm"
+          (ngSubmit)="updateProfile()"
+        >
+
+          <!-- Full Name -->
+
+          <div class="form-group">
+
+            <label>
+              Full Name
+            </label>
+
+
+            <div
+              class="input-box"
+              [class.editing]="editMode"
+            >
+
+              <i class="bi bi-person"></i>
+
+              <input
+                type="text"
+                formControlName="fullName"
+                placeholder="Full name"
+              >
+
+            </div>
+
+
+            <small
+              class="error"
+              *ngIf="
+                profileForm.get('fullName')?.touched &&
+                profileForm.get('fullName')?.invalid
+              "
+            >
+              Full name is required.
+            </small>
+
+          </div>
+
+
+
+          <!-- Email -->
+
+          <div class="form-group">
+
+            <label>
+              Email Address
+            </label>
+
+
+            <div
+              class="input-box"
+              [class.editing]="editMode"
+            >
+
+              <i class="bi bi-envelope"></i>
+
+              <input
+                type="email"
+                formControlName="email"
+                placeholder="Email address"
+              >
+
+            </div>
+
+
+            <small
+              class="error"
+              *ngIf="
+                profileForm.get('email')?.touched &&
+                profileForm.get('email')?.invalid
+              "
+            >
+              Enter a valid email address.
+            </small>
+
+          </div>
+
+
+
+          <!-- Phone -->
+
+          <div class="form-group">
+
+            <label>
+              Phone Number
+            </label>
+
+
+            <div
+              class="input-box"
+              [class.editing]="editMode"
+            >
+
+              <i class="bi bi-phone"></i>
+
+              <input
+                type="text"
+                formControlName="phone"
+                placeholder="Phone number"
+              >
+
+            </div>
+
+
+            <small
+              class="error"
+              *ngIf="
+                profileForm.get('phone')?.touched &&
+                profileForm.get('phone')?.invalid
+              "
+            >
+              Phone number is required.
+            </small>
+
+          </div>
+
+
+
+          <!-- Success -->
+
+          <div
+            class="message success-message"
+            *ngIf="successMessage"
+          >
+
+            <i class="bi bi-check-circle"></i>
+
+            {{ successMessage }}
+
+          </div>
+
+
+
+          <!-- Error -->
+
+          <div
+            class="message error-message"
+            *ngIf="errorMessage"
+          >
+
+            <i class="bi bi-exclamation-circle"></i>
+
+            {{ errorMessage }}
+
+          </div>
+
+
+
+          <!-- Buttons -->
+
+          <div
+            class="form-actions"
+            *ngIf="editMode"
+          >
+
+            <button
+              type="button"
+              class="cancel-btn"
+              (click)="cancelEdit()"
+            >
+
+              Cancel
+
+            </button>
+
+
+            <button
+              type="submit"
+              class="save-btn"
+              [disabled]="saving"
+            >
+
+              <i
+                class="bi bi-check2"
+                *ngIf="!saving"
+              ></i>
+
+              {{
+                saving
+                  ? 'Saving...'
+                  : 'Save Changes'
+              }}
+
+            </button>
+
+          </div>
+
+        </form>
+
+
+
+        <!-- Bottom Info -->
+
+        <div
+          class="view-mode-info"
+          *ngIf="!editMode"
+        >
+
+          <div class="security-icon">
+
+            <i class="bi bi-shield-lock"></i>
+
+          </div>
+
+
+          <div>
+
+            <strong>
+              Your information is secure
+            </strong>
+
+            <p>
+              Click Edit Profile if you need
+              to update your account information.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

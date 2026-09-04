@@ -1,0 +1,17 @@
+.admin-layout {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.admin-content {
+  margin-left: 250px;
+  width: calc(100% - 250px);
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.page-content {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}

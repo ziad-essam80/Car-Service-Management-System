@@ -1,0 +1,908 @@
+/* =============================================
+   GENERAL
+============================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+:host {
+    
+  display: block;
+  width: 100%;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+    height: calc(100vh - 100px);
+
+  overflow: hidden;
+  color: #111827;
+}
+
+
+/* =============================================
+   DASHBOARD
+============================================= */
+
+.dashboard-page {
+
+  width: 100%;
+  min-height: 100vh;
+
+  margin: 0;
+
+  padding: 20px;
+
+  background: #f6f8fc;
+}
+
+
+.main-content {
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+}
+
+
+/* =============================================
+   HEADER
+============================================= */
+
+.top-header {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 40px;
+
+  margin-bottom: 35px;
+}
+
+
+.top-header h1 {
+  margin: 0;
+
+  font-size: 25px;
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+
+.search-box {
+  width: 430px;
+  height: 48px;
+
+  background: white;
+
+  border: 1px solid #e4e8ef;
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 15px;
+
+  gap: 12px;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+
+.search-box i {
+  font-size: 17px;
+}
+
+
+.search-box input {
+  flex: 1;
+
+  border: none;
+  outline: none;
+
+  font-size: 13px;
+
+  color: #606776;
+
+  background: transparent;
+}
+
+
+/* =============================================
+   TOP STATISTICS
+============================================= */
+
+.stats-grid {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 18px;
+
+  margin-bottom: 20px;
+}
+
+
+.stat-card {
+  min-width: 0;
+  height: 125px;
+
+  background: white;
+
+  border: 1px solid #e4e8ef;
+
+  border-radius: 14px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 20px;
+
+  gap: 18px;
+
+  transition: 0.25s;
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.025);
+}
+
+
+.stat-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow: 0 10px 30px rgba(21, 55, 103, 0.08);
+}
+
+
+/* صورة الـ Stat */
+
+.stat-icon {
+  width: 64px;
+  height: 64px;
+
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  flex-shrink: 0;
+}
+
+
+.stat-icon img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+/* النص */
+
+.stat-info {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+.stat-title {
+  margin-bottom: 6px;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  color: #303846;
+}
+
+
+.stat-info h2 {
+  margin: 0;
+
+  font-size: 28px;
+  font-weight: 700;
+}
+
+
+.stat-info small {
+  margin-top: 7px;
+
+  font-size: 11px;
+
+  color: #0bb764;
+}
+
+
+/* =============================================
+   GENERAL CARD
+============================================= */
+
+.card-box {
+  min-width: 0;
+
+  background: white;
+
+  border: 1px solid #e1e7ef;
+
+  border-radius: 14px;
+
+  padding: 18px;
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.025);
+}
+
+
+.card-header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 18px;
+}
+
+
+.card-header h3 {
+  margin: 0;
+
+  font-size: 18px;
+  font-weight: 600;
+}
+
+
+.card-header a {
+  font-size: 12px;
+  font-weight: 600;
+
+  color: #0066ff;
+
+  cursor: pointer;
+
+  text-decoration: none;
+}
+
+
+.card-header select {
+  padding: 7px 10px;
+
+  border: 1px solid #d9e0e8;
+
+  border-radius: 7px;
+
+  outline: none;
+
+  font-size: 11px;
+
+  color: #6b7280;
+
+  background: white;
+}
+
+
+/* =============================================
+   OVERVIEW
+============================================= */
+
+.overview-grid {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: 1.05fr 1fr;
+
+  gap: 18px;
+
+  margin-bottom: 20px;
+}
+
+
+/* =============================================
+   SERVICE OVERVIEW
+============================================= */
+
+.service-content {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 38px;
+}
+
+
+.donut-chart {
+  width: 200px;
+  height: 200px;
+
+  border-radius: 50%;
+
+  position: relative;
+
+  flex-shrink: 0;
+
+  background: conic-gradient(
+    #ef3d50 0deg 75deg,
+    white 75deg 79deg,
+
+    #6cbd55 79deg 123deg,
+    white 123deg 127deg,
+
+    #ffad32 127deg 181deg,
+    white 181deg 185deg,
+
+    #1599dc 185deg 270deg,
+    white 270deg 274deg,
+
+    #ff773c 274deg 360deg
+  );
+}
+
+
+.donut-hole {
+  width: 73px;
+  height: 73px;
+
+  background: white;
+
+  border-radius: 50%;
+
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+}
+
+
+.service-list {
+  flex: 1;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 16px;
+}
+
+
+.service-row {
+  display: grid;
+
+  grid-template-columns: minmax(110px, 1fr) 45px 45px;
+
+  align-items: center;
+
+  gap: 10px;
+
+  font-size: 13px;
+}
+
+
+.service-name {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+
+.dot {
+  width: 9px;
+  height: 9px;
+
+  border-radius: 3px;
+
+  flex-shrink: 0;
+}
+
+
+.service-number {
+  color: #111827;
+}
+
+
+.percentage {
+  padding: 4px 7px;
+
+  border-radius: 15px;
+
+  font-size: 11px;
+
+  text-align: center;
+}
+
+
+/* =============================================
+   APPOINTMENTS
+============================================= */
+
+.appointment-row {
+  min-height: 59px;
+
+  display: grid;
+
+  grid-template-columns:
+    68px
+    52px
+    1.2fr
+    1fr
+    90px;
+
+  align-items: center;
+
+  border-bottom: 1px solid #edf0f5;
+
+  gap: 8px;
+
+  font-size: 12px;
+}
+
+
+.appointment-row:last-child {
+  border-bottom: none;
+}
+
+
+.appointment-time {
+  font-size: 12px;
+  font-weight: 600;
+
+  color: #0066ff;
+}
+
+
+.car-small {
+  width: 45px;
+  height: 28px;
+
+  object-fit: cover;
+
+  border-radius: 5px;
+}
+
+
+.vehicle-info {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+
+.vehicle-info strong {
+  font-size: 13px;
+}
+
+
+.vehicle-info span {
+  font-size: 10px;
+
+  color: #969dab;
+}
+
+
+.appointment-service {
+  font-size: 12px;
+}
+
+
+/* =============================================
+   STATUS
+============================================= */
+
+.status {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 7px 12px;
+
+  border-radius: 20px;
+
+  font-size: 10px;
+
+  white-space: nowrap;
+}
+
+
+.status.progress {
+  color: #ff7d18;
+
+  background: #fff0e4;
+}
+
+
+.status.pending {
+  color: #1769ff;
+
+  background: #edf3ff;
+}
+
+
+.status.completed {
+  color: #04a85d;
+
+  background: #e7f8ef;
+}
+
+
+/* =============================================
+   BOTTOM AREA
+============================================= */
+
+.bottom-layout {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: 1.8fr 0.95fr;
+
+  gap: 18px;
+}
+
+
+.jobs-card {
+  min-width: 0;
+}
+
+
+.jobs-table {
+  width: 100%;
+}
+
+
+/* =============================================
+   JOBS TABLE
+============================================= */
+
+.table-row {
+  min-height: 58px;
+
+  display: grid;
+
+  grid-template-columns:
+    1.35fr
+    1fr
+    1.25fr
+    1fr
+    95px;
+
+  align-items: center;
+
+  border-bottom: 1px solid #edf0f5;
+
+  gap: 10px;
+
+  font-size: 12px;
+}
+
+
+.table-row:last-child {
+  border-bottom: 0;
+}
+
+
+.table-header {
+  min-height: 35px;
+
+  font-size: 11px;
+
+  color: #7790bd;
+}
+
+
+.vehicle-cell {
+  min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+
+.vehicle-cell img {
+  width: 50px;
+  height: 31px;
+
+  object-fit: cover;
+
+  border-radius: 5px;
+
+  flex-shrink: 0;
+}
+
+
+.mechanic {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+}
+
+
+.mechanic img {
+  width: 28px;
+  height: 28px;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  flex-shrink: 0;
+}
+
+
+/* =============================================
+   RIGHT COLUMN
+============================================= */
+
+.right-column {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+
+/* =============================================
+   MECHANICS PERFORMANCE
+============================================= */
+
+.mechanic-performance {
+  min-height: 33px;
+
+  display: grid;
+
+  grid-template-columns: 90px 1fr 35px;
+
+  gap: 8px;
+
+  align-items: center;
+}
+
+
+.mechanic-name {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  font-size: 11px;
+}
+
+
+.mechanic-name img {
+  width: 22px;
+  height: 22px;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+
+  flex-shrink: 0;
+}
+
+
+.performance-bar {
+  width: 100%;
+  height: 8px;
+
+  border-radius: 4px;
+
+  background: #edf1f8;
+
+  overflow: hidden;
+}
+
+
+.performance-value {
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    #5577ff,
+    #4264e9
+  );
+
+  border-radius: 4px;
+}
+
+
+.performance-number {
+  font-size: 11px;
+}
+
+
+/* =============================================
+   INVENTORY
+============================================= */
+
+.inventory-item {
+  min-height: 52px;
+
+  display: grid;
+
+  grid-template-columns: 35px 1fr auto;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+
+.inventory-icon {
+  width: 30px;
+  height: 30px;
+
+  border-radius: 8px;
+
+  background: #f3f5f9;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 16px;
+}
+
+
+.inventory-info {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+
+.inventory-info strong {
+  font-size: 12px;
+}
+
+
+.inventory-info span {
+  font-size: 10px;
+
+  color: #8b94a5;
+}
+
+
+.stock-status {
+  padding: 6px 10px;
+
+  border-radius: 15px;
+
+  font-size: 9px;
+
+  white-space: nowrap;
+}
+
+
+.stock-status.low {
+  color: #ff5564;
+
+  background: #ffecef;
+}
+
+
+.stock-status.reorder {
+  color: #f68b28;
+
+  background: #fff0df;
+}
+
+
+/* =============================================
+   RESPONSIVE
+============================================= */
+
+@media (max-width: 1200px) {
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+
+  .overview-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .bottom-layout {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 768px) {
+
+  .dashboard-page {
+    padding: 15px;
+  }
+
+
+  .top-header {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 15px;
+  }
+
+
+  .search-box {
+    width: 100%;
+  }
+
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .service-content {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+
+  .appointment-row {
+    grid-template-columns:
+      65px
+      45px
+      1fr;
+
+    gap: 8px;
+  }
+
+
+  .appointment-service {
+    display: none;
+  }
+
+
+  .appointment-row .status {
+    display: none;
+  }
+
+
+  .table-row {
+    grid-template-columns:
+      1.3fr
+      1fr
+      1fr;
+  }
+
+
+  .table-row > :nth-child(4),
+  .table-row > :nth-child(5) {
+    display: none;
+  }
+
+}

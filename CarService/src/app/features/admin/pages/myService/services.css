@@ -1,0 +1,518 @@
+.services-page {
+  padding: 20px;
+}
+
+
+/* Header */
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 22px;
+}
+
+.page-header h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.page-header p {
+  margin: 5px 0 0;
+
+  color: #7d899d;
+
+  font-size: 13px;
+}
+
+
+.add-btn {
+  height: 42px;
+
+  padding: 0 18px;
+
+  border: none;
+  border-radius: 9px;
+
+  background: #1769ff;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  cursor: pointer;
+}
+
+
+
+/* Main Card */
+
+.services-card {
+  background: white;
+
+  border: 1px solid #e2e7ef;
+  border-radius: 14px;
+
+  overflow: hidden;
+}
+
+
+.card-header {
+  padding: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 1px solid #e6eaf0;
+}
+
+.card-header h3 {
+  margin: 0;
+
+  font-size: 18px;
+}
+
+.card-header p {
+  margin: 5px 0 0;
+
+  font-size: 12px;
+
+  color: #8792a5;
+}
+
+
+
+/* Search */
+
+.search-box {
+  width: 270px;
+  height: 40px;
+
+  border: 1px solid #dce2ea;
+  border-radius: 9px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 13px;
+
+  gap: 8px;
+}
+
+.search-box i {
+  color: #8a95a8;
+}
+
+.search-box input {
+  width: 100%;
+
+  border: none;
+  outline: none;
+
+  font-size: 13px;
+}
+
+
+
+/* Table */
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+
+  border-collapse: collapse;
+}
+
+th {
+  padding: 15px 20px;
+
+  background: #f8f9fc;
+
+  text-align: left;
+
+  font-size: 12px;
+  font-weight: 500;
+
+  color: #63708a;
+}
+
+td {
+  padding: 16px 20px;
+
+  border-bottom: 1px solid #edf0f4;
+
+  font-size: 13px;
+}
+
+
+.service-info {
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+}
+
+
+.service-icon {
+  width: 42px;
+  height: 42px;
+
+  border-radius: 10px;
+
+  background: #eaf1ff;
+  color: #1769ff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 18px;
+}
+
+
+.service-info strong {
+  display: block;
+}
+
+.service-info span {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #8994a7;
+
+  font-size: 11px;
+}
+
+
+.description {
+  color: #626e82;
+}
+
+
+.price {
+  color: #111827;
+}
+
+
+
+/* Status */
+
+.status-btn {
+  border: none;
+
+  min-width: 75px;
+
+  padding: 6px 14px;
+
+  border-radius: 20px;
+
+  cursor: pointer;
+
+  font-size: 11px;
+}
+
+.status-btn.active {
+  background: #e5f8ef;
+  color: #119b5e;
+}
+
+.status-btn.inactive {
+  background: #f1f3f6;
+  color: #7d899d;
+}
+
+
+
+/* Actions */
+
+.actions {
+  display: flex;
+
+  gap: 7px;
+}
+
+.action-btn {
+  width: 34px;
+  height: 34px;
+
+  border: none;
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+}
+
+.action-btn.edit {
+  background: #fff3df;
+  color: #f59e0b;
+}
+
+.action-btn.delete {
+  background: #ffe8ed;
+  color: #ef3d50;
+}
+
+
+.no-data {
+  text-align: center;
+
+  color: #8792a5;
+
+  padding: 35px;
+}
+
+
+
+/* ================= MODAL ================= */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(15, 23, 42, 0.45);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  z-index: 9999;
+}
+
+
+.service-modal {
+  width: 100%;
+  max-width: 560px;
+
+  background: white;
+
+  border-radius: 16px;
+
+  box-shadow:
+    0 20px 60px
+    rgba(0, 0, 0, 0.18);
+
+  overflow: hidden;
+}
+
+
+.modal-header {
+  padding: 20px 24px;
+
+  border-bottom: 1px solid #e9edf4;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.modal-header h3 {
+  margin: 0;
+
+  font-size: 20px;
+}
+
+.modal-header p {
+  margin: 5px 0 0;
+
+  color: #8490a5;
+
+  font-size: 13px;
+}
+
+
+.close-btn {
+  width: 36px;
+  height: 36px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #f4f6fa;
+
+  cursor: pointer;
+}
+
+
+
+/* Body */
+
+.modal-body {
+  padding: 24px;
+}
+
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+
+.form-group label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+
+  border: 1px solid #dfe4ec;
+
+  border-radius: 9px;
+
+  outline: none;
+
+  padding: 12px;
+
+  font-size: 14px;
+
+  box-sizing: border-box;
+}
+
+
+.form-group input {
+  height: 44px;
+}
+
+
+.form-group textarea {
+  height: 100px;
+
+  resize: none;
+}
+
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #1769ff;
+}
+
+
+
+/* Price */
+
+.price-input {
+  display: flex;
+  align-items: center;
+
+  border: 1px solid #dfe4ec;
+
+  border-radius: 9px;
+
+  overflow: hidden;
+}
+
+.price-input input {
+  border: none;
+  border-radius: 0;
+}
+
+.price-input span {
+  padding: 0 15px;
+
+  color: #7d899d;
+
+  font-size: 12px;
+}
+
+
+
+/* Status */
+
+.active-control {
+  padding: 15px;
+
+  background: #f8faff;
+
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.active-control strong {
+  display: block;
+
+  font-size: 13px;
+}
+
+.active-control span {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #8994a7;
+
+  font-size: 11px;
+}
+
+
+.active-control input {
+  width: 18px;
+  height: 18px;
+}
+
+
+
+/* Footer */
+
+.modal-footer {
+  padding: 16px 24px;
+
+  border-top: 1px solid #e9edf4;
+
+  display: flex;
+  justify-content: flex-end;
+
+  gap: 10px;
+}
+
+
+.cancel-btn,
+.save-btn {
+  height: 40px;
+
+  padding: 0 18px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+}
+
+
+.cancel-btn {
+  background: white;
+
+  border: 1px solid #dce1e8;
+}
+
+
+.save-btn {
+  border: none;
+
+  background: #1769ff;
+  color: white;
+
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+}

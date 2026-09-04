@@ -1,0 +1,32 @@
+# =====================
+# Angular
+# =====================
+node_modules/
+.angular/
+dist/
+
+# =====================
+# .NET
+# =====================
+bin/
+obj/
+.vs/
+
+# Visual Studio
+*.user
+*.suo
+*.userosscache
+
+# Logs
+*.log
+logs/
+
+# Environment / Secrets
+.env
+.env.*
+appsettings.Development.json
+appsettings.Local.json
+
+# OS
+.DS_Store
+Thumbs.db

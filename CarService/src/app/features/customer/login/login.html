@@ -1,0 +1,311 @@
+<div class="auth-page">
+
+  <!-- Left Side -->
+
+  <div class="auth-visual">
+
+    <div class="visual-overlay"></div>
+
+
+    <div class="brand">
+
+      <div class="brand-icon">
+        <i class="bi bi-car-front-fill"></i>
+      </div>
+
+      <div>
+        <h2>Car Service</h2>
+        <span>Management System</span>
+      </div>
+
+    </div>
+
+
+    <div class="visual-content">
+
+      <span class="small-title">
+        SMART CAR CARE
+      </span>
+
+      <h1>
+        Your car deserves
+        <span>better care.</span>
+      </h1>
+
+      <p>
+        Book services, track your vehicle
+        and manage your maintenance history
+        from one simple place.
+      </p>
+
+
+      <div class="features">
+
+        <div class="feature">
+
+          <div class="feature-icon">
+            <i class="bi bi-calendar-check"></i>
+          </div>
+
+          <div>
+            <strong>Easy Booking</strong>
+            <span>Schedule your service in minutes</span>
+          </div>
+
+        </div>
+
+
+        <div class="feature">
+
+          <div class="feature-icon">
+            <i class="bi bi-geo-alt"></i>
+          </div>
+
+          <div>
+            <strong>Live Tracking</strong>
+            <span>Follow every maintenance stage</span>
+          </div>
+
+        </div>
+
+
+        <div class="feature">
+
+          <div class="feature-icon">
+            <i class="bi bi-shield-check"></i>
+          </div>
+
+          <div>
+            <strong>Trusted Service</strong>
+            <span>Your vehicle is in safe hands</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="visual-footer">
+      © 2026 Car Service Management System
+    </div>
+
+  </div>
+
+
+
+  <!-- Right Side -->
+
+  <div class="auth-form-side">
+
+    <div class="form-container">
+
+
+      <div class="mobile-brand">
+
+        <div class="brand-icon">
+          <i class="bi bi-car-front-fill"></i>
+        </div>
+
+        <strong>Car Service</strong>
+
+      </div>
+
+
+      <div class="form-header">
+
+        <span class="welcome-label">
+          WELCOME BACK
+        </span>
+
+        <h2>
+          Sign in to your account
+        </h2>
+
+        <p>
+          Enter your details to continue
+          to your customer dashboard.
+        </p>
+
+      </div>
+
+
+      <form
+        [formGroup]="loginForm"
+        (ngSubmit)="login()"
+      >
+
+        <!-- Email -->
+
+        <div class="form-group">
+
+          <label>
+            Email Address
+          </label>
+
+          <div
+            class="input-box"
+            [class.input-error]="
+              loginForm.get('email')?.touched &&
+              loginForm.get('email')?.invalid
+            "
+          >
+
+            <i class="bi bi-envelope"></i>
+
+            <input
+              type="email"
+              formControlName="email"
+              placeholder="name@example.com"
+            >
+
+          </div>
+
+
+          <small
+            class="error"
+            *ngIf="
+              loginForm.get('email')?.touched &&
+              loginForm.get('email')?.hasError('required')
+            "
+          >
+            Email is required.
+          </small>
+
+          <small
+            class="error"
+            *ngIf="
+              loginForm.get('email')?.touched &&
+              loginForm.get('email')?.hasError('email')
+            "
+          >
+            Enter a valid email address.
+          </small>
+
+        </div>
+
+
+
+        <!-- Password -->
+
+        <div class="form-group">
+
+          <div class="password-label">
+
+            <label>
+              Password
+            </label>
+
+            <a href="javascript:void(0)">
+              Forgot password?
+            </a>
+
+          </div>
+
+
+          <div
+            class="input-box"
+            [class.input-error]="
+              loginForm.get('password')?.touched &&
+              loginForm.get('password')?.invalid
+            "
+          >
+
+            <i class="bi bi-lock"></i>
+
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              formControlName="password"
+              placeholder="Enter your password"
+            >
+
+
+            <button
+              type="button"
+              class="password-toggle"
+              (click)="togglePassword()"
+            >
+
+              <i
+                class="bi"
+                [class.bi-eye]="!showPassword"
+                [class.bi-eye-slash]="showPassword"
+              ></i>
+
+            </button>
+
+          </div>
+
+
+          <small
+            class="error"
+            *ngIf="
+              loginForm.get('password')?.touched &&
+              loginForm.get('password')?.invalid
+            "
+          >
+            Password is required.
+          </small>
+
+        </div>
+
+
+
+        <!-- API Error -->
+
+        <div
+          class="error-message"
+          *ngIf="errorMessage"
+        >
+
+          <i class="bi bi-exclamation-circle"></i>
+
+          {{ errorMessage }}
+
+        </div>
+
+
+
+        <!-- Login Button -->
+
+        <button
+          type="submit"
+          class="submit-btn"
+          [disabled]="loading"
+        >
+
+          <span *ngIf="!loading">
+            Sign In
+          </span>
+
+          <span *ngIf="loading">
+            Signing In...
+          </span>
+
+          <i
+            class="bi bi-arrow-right"
+            *ngIf="!loading"
+          ></i>
+
+        </button>
+
+      </form>
+
+
+
+      <div class="register-text">
+
+        Don't have an account?
+
+        <a routerLink="/customer/register">
+          Create account
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
